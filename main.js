@@ -57,19 +57,25 @@ const gui = new GUI()
 
 const loader = new GLTFLoader();
 loader.load(
-  "./jack-hand-3.gltf", 
+  "./jack-hand-4.gltf", 
   (gltf) => {
     const positionFolder = gui.addFolder('position')
     positionFolder.add(gltf.scene.position, 'y', -0.5, 0.5, 0.01).name('y position')
     positionFolder.add(gltf.scene.rotation, 'y', -Math.PI, Math.PI, 0.01).name('y rotation')
 
-    // const thumbFolder = gui.addFolder('thumb finger')
+    // const thumbFolder = gui.addFolder('thumb')
     // const thumb_finger = gltf.scene.children[0].children[1].children[4].children[0].children[0]
-    // thumbFolder.add(thumb_finger.rotation, 'x', -0.272, Math.PI * 0.5, 0.01).name('thumb finger')
+    // thumbFolder.add(thumb_finger.rotation, 'x', -0.272, Math.PI * 0.5, 0.01).name('thumb')
     // const thumb_finger2 = gltf.scene.children[0].children[1].children[4].children[0].children[0].children[0]
-    // thumbFolder.add(thumb_finger2.rotation, 'x', -Math.PI * 0.5, -0.272, 0.01).name('thumb2 finger')
+    // thumbFolder.add(thumb_finger2.rotation, 'x', -Math.PI * 0.5, -0.272, 0.01).name('thumb2')
 
-    const indexFolder = gui.addFolder('index finger')
+    const thumbFolder = gui.addFolder('thumb')
+    const thumb_finger = gltf.scene.children[0].children[1].children[4].children[0].children[0]
+    thumbFolder.add(thumb_finger.rotation, 'x', -Math.PI * 0.5, -0.272, 0.01).name('finger')
+    const thumb_middle_falanx = gltf.scene.children[0].children[1].children[4].children[0].children[0].children[0]
+    thumbFolder.add(thumb_middle_falanx.rotation, 'x', -Math.PI * 0.33, -0.272, 0.01).name('middle phalanx')
+
+    const indexFolder = gui.addFolder('index')
     const index_finger = gltf.scene.children[0].children[1].children[0].children[0].children[0]
     indexFolder.add(index_finger.rotation, 'x', -Math.PI * 0.5, -0.272, 0.01).name('finger')
     const index_middle_falanx = gltf.scene.children[0].children[1].children[0].children[0].children[0].children[0]
@@ -77,7 +83,7 @@ loader.load(
     const index_distal_falanx = gltf.scene.children[0].children[1].children[0].children[0].children[0].children[0].children[0]
     indexFolder.add(index_distal_falanx.rotation, 'x', -0.5, -0.0354, 0.01).name('distal phalanx')
 
-    const middleFolder = gui.addFolder('middle finger')
+    const middleFolder = gui.addFolder('middle')
     const middle_finger = gltf.scene.children[0].children[1].children[1].children[0].children[0]
     middleFolder.add(middle_finger.rotation, 'x', -Math.PI * 0.5, -0.272, 0.01).name('finger')
     const middle_middle_falanx = gltf.scene.children[0].children[1].children[1].children[0].children[0].children[0]
@@ -85,7 +91,7 @@ loader.load(
     const middle_distal_falanx = gltf.scene.children[0].children[1].children[1].children[0].children[0].children[0].children[0]
     middleFolder.add(middle_distal_falanx.rotation, 'x', -0.5, -0.0315, 0.01).name('distal phalanx')
 
-    const ringFolder = gui.addFolder('ring finger')
+    const ringFolder = gui.addFolder('ring')
     const ring_finger = gltf.scene.children[0].children[1].children[2].children[0].children[0]
     ringFolder.add(ring_finger.rotation, 'x', -Math.PI * 0.5, -0.272, 0.01).name('finger')
     const ring_middle_falanx = gltf.scene.children[0].children[1].children[2].children[0].children[0].children[0]
@@ -93,7 +99,7 @@ loader.load(
     const ring_distal_falanx = gltf.scene.children[0].children[1].children[2].children[0].children[0].children[0].children[0]
     ringFolder.add(ring_distal_falanx.rotation, 'x', -0.5, -0.0301, 0.01).name('distal phalanx')
 
-    const littleFolder = gui.addFolder('little finger')
+    const littleFolder = gui.addFolder('little')
     const little_finger = gltf.scene.children[0].children[1].children[3].children[0].children[0]
     littleFolder.add(little_finger.rotation, 'x', -Math.PI * 0.5, -0.272, 0.01).name('finger')
     const little_middle_falanx = gltf.scene.children[0].children[1].children[3].children[0].children[0].children[0]
