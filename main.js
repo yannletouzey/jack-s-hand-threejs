@@ -63,12 +63,6 @@ loader.load(
     positionFolder.add(gltf.scene.position, 'y', -0.5, 0.5, 0.01).name('y position')
     positionFolder.add(gltf.scene.rotation, 'y', -Math.PI, Math.PI, 0.01).name('y rotation')
 
-    // const thumbFolder = gui.addFolder('thumb')
-    // const thumb_finger = gltf.scene.children[0].children[1].children[4].children[0].children[0]
-    // thumbFolder.add(thumb_finger.rotation, 'x', -0.272, Math.PI * 0.5, 0.01).name('thumb')
-    // const thumb_finger2 = gltf.scene.children[0].children[1].children[4].children[0].children[0].children[0]
-    // thumbFolder.add(thumb_finger2.rotation, 'x', -Math.PI * 0.5, -0.272, 0.01).name('thumb2')
-
     const thumbFolder = gui.addFolder('thumb')
     const thumb_finger = gltf.scene.children[0].children[1].children[4].children[0].children[0]
     thumbFolder.add(thumb_finger.rotation, 'x', -Math.PI * 0.5, -0.272, 0.01).name('finger')
