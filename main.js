@@ -33,24 +33,24 @@ scene.add(camera);
 const textureLoader = new THREE.TextureLoader()
 const matcapTexture = textureLoader.load('/8.png')
 const fontLoader = new FontLoader();
-fontLoader.load("/helvetiker_regular.typeface.json", (font) => {
+fontLoader.load("/Retro-Cool_Regular.json", (font) => {
   const textGeometry = new TextGeometry("Jack's hand", {
     font: font,
-    size: 0.5,
+    size: 0.4,
     height: 0.2,
-    curveSegments: 5,
+    curveSegments: 10,
     bevelEnabled: true,
     bevelThickness: 0.03,
-    bevelSize: 0.02,
+    bevelSize: 0.04,
     bevelOffset: 0,
-    bevelSegments: 4,
+    bevelSegments: 6,
   });
   textGeometry.center()
   const material = new THREE.MeshMatcapMaterial({matcap: matcapTexture});
   const text = new THREE.Mesh(textGeometry, material);
   text.scale.set(0.1, 0.1, 0.1);
-  text.position.set(0, -0.2, -0.4);
-  camera.add(text);
+  text.position.set(0, -0.15, 0);
+  scene.add(text);
 });
 
 const gui = new GUI()
