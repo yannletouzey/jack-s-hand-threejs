@@ -3,7 +3,12 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
+import Camera from "./Camera";
+import AmbLight from "./AmbientLight";
+import DirectLight from "./DirectionalLight";
 import GUI from "lil-gui";
+
+const camera = new Camera();
 
 const sizes = {
   width: window.innerWidth,
@@ -24,14 +29,13 @@ window.addEventListener('resize', () => {
 const canvas = document.getElementById("canvas");
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x000000);
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
 
-camera.position.set(0, 0, 0.3);
-camera.lookAt(0, 0, 0);
-scene.add(camera);
+const ambientLight = new AmbLight();
+const directLight = new DirectLight();
+scene.add(ambientLight, directLight);
 
 const textureLoader = new THREE.TextureLoader()
-const matcapTexture = textureLoader.load('/8.png')
+const matcapTexture = textureLoader.load('/3.png')
 const fontLoader = new FontLoader();
 fontLoader.load("/Retro-Cool_Regular.json", (font) => {
   const textGeometry = new TextGeometry("Jack's hand", {
@@ -114,13 +118,6 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setClearColor(0x000000, 0);
-
-const ambientLight = new THREE.AmbientLight(0xffffff, 1)
-scene.add(ambientLight)
-
-const directionalLight = new THREE.DirectionalLight(0xffffff, 2)
-directionalLight.position.set(-3, 3, 0)
-scene.add(directionalLight)
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.update();
