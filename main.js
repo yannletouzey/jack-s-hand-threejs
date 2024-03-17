@@ -7,6 +7,7 @@ import Camera from "./Camera";
 import AmbLight from "./AmbientLight";
 import DirectLight from "./DirectionalLight";
 import GUI from "lil-gui";
+const gui = new GUI()
 
 const camera = new Camera();
 
@@ -53,11 +54,10 @@ fontLoader.load("/Retro-Cool_Regular.json", (font) => {
   const material = new THREE.MeshMatcapMaterial({matcap: matcapTexture});
   const text = new THREE.Mesh(textGeometry, material);
   text.scale.set(0.1, 0.1, 0.1);
-  text.position.set(0, -0.15, 0);
-  scene.add(text);
+  text.position.set(0, -0.14, -0.3);
+  camera.add(text);
 });
-
-const gui = new GUI()
+scene.add(camera);
 
 const loader = new GLTFLoader();
 loader.load(
