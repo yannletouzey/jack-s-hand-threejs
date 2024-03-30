@@ -3,14 +3,13 @@ import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry.js";
-import Camera from "./Camera";
-import AmbLight from "./AmbientLight";
-import DirectLight from "./DirectionalLight";
+import Camera from "./class/Camera";
+import AmbLight from "./class/Lights/AmbientLight";
+import PointLight from "./class/Lights/PointLight";
 import GUI from "lil-gui";
+
 const gui = new GUI()
-
 const camera = new Camera();
-
 const sizes = {
   width: window.innerWidth,
   height: window.innerHeight
@@ -32,11 +31,12 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x000000);
 
 const ambientLight = new AmbLight();
-const directLight = new DirectLight();
-scene.add(ambientLight, directLight);
+scene.add(ambientLight);
+const point = new PointLight();
+camera.add(point);
 
 const textureLoader = new THREE.TextureLoader()
-const matcapTexture = textureLoader.load('/3.png')
+const matcapTexture = textureLoader.load('/4.png')
 const fontLoader = new FontLoader();
 fontLoader.load("/Retro-Cool_Regular.json", (font) => {
   const textGeometry = new TextGeometry("Jack's hand", {
@@ -55,6 +55,7 @@ fontLoader.load("/Retro-Cool_Regular.json", (font) => {
   const text = new THREE.Mesh(textGeometry, material);
   text.scale.set(0.1, 0.1, 0.1);
   text.position.set(0, -0.14, -0.3);
+  text.rotation.x = -Math.PI * 0.05
   camera.add(text);
 });
 scene.add(camera);
