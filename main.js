@@ -8,7 +8,11 @@ import AmbLight from "./class/Lights/AmbientLight";
 import PointLight from "./class/Lights/PointLight";
 import GUI from "lil-gui";
 
-const gui = new GUI()
+const gui = new GUI({
+  name: "gui",
+  closeFolders: true
+})
+
 const camera = new Camera();
 const sizes = {
   width: window.innerWidth,
@@ -61,8 +65,7 @@ fontLoader.load("/Retro-Cool_Regular.json", (font) => {
 scene.add(camera);
 
 const loader = new GLTFLoader();
-loader.load(
-  "./jack-hand-4.gltf", 
+loader.load("./jack-hand-4.gltf", 
   (gltf) => {
     const positionFolder = gui.addFolder('position')
     positionFolder.add(gltf.scene.position, 'y', -0.5, 0.5, 0.01).name('y position')
@@ -110,6 +113,29 @@ loader.load(
     scene.add(gltf.scene)
   }
 );
+// Particles
+const textureParticles = new THREE.TextureLoader().load(
+  '9.png'
+)
+const count = 200
+const positions = new Float32Array(count * 3)
+
+for (let i = 0; i < count * 3; i++) {
+  positions[i] = (Math.random() - 0.5) * 4
+}
+
+const particlesGeometry = new THREE.BufferGeometry()
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+
+const particlesMaterial = new THREE.PointsMaterial({
+  size: 0.03,
+  sizeAttenuation: true,
+  color: 0xffffff,
+  map: textureParticles,
+})
+
+const particles = new THREE.Points(particlesGeometry, particlesMaterial)
+scene.add(particles)
 
 const renderer = new THREE.WebGLRenderer({
   canvas,
@@ -121,6 +147,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setClearColor(0x000000, 0);
 
 const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableZoom = false;
 controls.update();
 
 function animate() {
