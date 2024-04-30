@@ -131,7 +131,9 @@ const particlesMaterial = new THREE.PointsMaterial({
   size: 0.03,
   sizeAttenuation: true,
   color: 0xffffff,
-  map: textureParticles,
+  transparent: true,
+  alphaMap: textureParticles,
+  depthWrite: false,
 })
 
 const particles = new THREE.Points(particlesGeometry, particlesMaterial)
