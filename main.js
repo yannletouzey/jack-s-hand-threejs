@@ -148,6 +148,7 @@ renderer.setClearColor(0x000000, 0);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableZoom = false;
+controls.enablePan = false;
 controls.update();
 
 function animate() {
